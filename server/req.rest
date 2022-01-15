@@ -1,0 +1,10 @@
+
+GET http://localhost:3001/newGame
+
+###
+
+GET http://localhost:3001/hit
+###
+
+GET http://localhost:3001/stand
+
