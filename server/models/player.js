@@ -1,18 +1,21 @@
-const player = () => {
-  hand = [];
-  handStatus = "";
-  score = 0;
-  function cleanHand() {
+const { getHandValue } = require("../utils/helpers");
+class Player {
+  constructor() {
     this.hand = [];
     this.handStatus = "";
     this.score = 0;
   }
-  return {
-    hand,
-    handStatus,
-    score,
-    cleanHand,
-  };
-};
 
-module.exports = player();
+  cleanHand() {
+    this.hand = [];
+    this.handStatus = "";
+    this.score = 0;
+  }
+
+  addScore() {
+    const handValue = getHandValue(this.hand);
+    this.score = handValue;
+  }
+}
+
+module.exports = Player;
