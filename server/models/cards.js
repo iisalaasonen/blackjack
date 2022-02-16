@@ -41,4 +41,4 @@ Deck.prototype.shuffleDeck = function () {
   shuffleArray(this.cards);
 };
 
-module.exports = new Deck();
+module.exports = Deck;
