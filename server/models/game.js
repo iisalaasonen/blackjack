@@ -19,8 +19,8 @@ class Game {
 
   dealCards() {
     for (let i = 0; i < 2; i++) {
-      this.player.hand[i] = this.deck.cards.pop();
-      this.dealer.hand[i] = this.deck.cards.pop();
+      this.player.hand[i] = this.pop();
+      this.dealer.hand[i] = this.pop();
     }
   }
 
@@ -40,7 +40,7 @@ class Game {
       this.player.handStatus = "PLAYING";
       //if player status stays playing reveal only face up card of dealer
       const showDealer = {
-        hand: this.dealer.hand[0],
+        hand: [this.dealer.hand[0]],
         score: getHandValue([this.dealer.hand[0]]),
       };
       status = { ...status, dealer: showDealer };
@@ -56,7 +56,7 @@ class Game {
     };
     if (this.player.score > 21) {
       this.player.handStatus = "BUSTED";
-    } else if (this.player.handStatus === 21) {
+    } else if (this.player.score === 21) {
       this.dealerScore();
       if (this.dealer.score === 21) {
         this.player.handStatus = "PUSH";
@@ -67,7 +67,7 @@ class Game {
       this.player.handStatus = "PLAYING";
       //if player status stays playing reveal only face up card of dealer
       const showDealer = {
-        hand: this.dealer.hand[0],
+        hand: [this.dealer.hand[0]],
         score: getHandValue([this.dealer.hand[0]]),
       };
       status = { ...status, dealer: showDealer };
