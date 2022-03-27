@@ -28,7 +28,6 @@ class Game {
     let status = {
       player: this.player,
       dealer: this.dealer,
-      deck: this.deck.cards,
     };
     if (this.player.score === 21 && this.dealer.score === 21) {
       this.player.handStatus = "PUSH";
@@ -52,7 +51,6 @@ class Game {
     let status = {
       player: this.player,
       dealer: this.dealer,
-      deck: this.deck.cards,
     };
     if (this.player.score > 21) {
       this.player.handStatus = "BUSTED";
@@ -89,7 +87,6 @@ class Game {
     let status = {
       player: this.player,
       dealer: this.dealer,
-      deck: this.deck.cards,
     };
     this.dealerScore();
     if (this.dealer.score >= 17 && this.dealer.score <= 21) {
