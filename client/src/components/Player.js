@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import Card from "./Card";
+import { CommonButton } from "../common/CommonButton";
 
 export const CardDiv = styled.div`
   background: var(--color-background);
@@ -24,8 +25,12 @@ const Player = ({ player, gameStatus, handleHit, handleStand }) => {
       <h1>PLAYER</h1>
       {gameStatus === "PLAYING" && (
         <ButtonsDiv>
-          <button onClick={handleHit}>HIT</button>
-          <button onClick={handleStand}>STAND</button>
+          <CommonButton background="#00802b" onClick={handleHit}>
+            HIT
+          </CommonButton>
+          <CommonButton background="#990000" onClick={handleStand}>
+            STAND
+          </CommonButton>
         </ButtonsDiv>
       )}
     </div>
