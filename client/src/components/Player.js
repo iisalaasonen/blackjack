@@ -1,21 +1,30 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import Card from "./Card";
 import { CommonButton } from "../common/CommonButton";
+
+export const PlayerDiv = styled.div`
+  width: 100%;
+  text-align: center;
+`;
 
 export const CardDiv = styled.div`
   background: var(--color-background);
   display: flex;
   gap: 20px;
+  justify-content: center;
+  margin: 0.5rem 0;
 `;
 
 const ButtonsDiv = styled.div`
   display: flex;
+  justify-content: center;
+  gap: 20px;
 `;
 
 const Player = ({ player, gameStatus, handleHit, handleStand }) => {
   return (
-    <div>
+    <PlayerDiv>
       <CardDiv>
         {player?.hand?.map((hand, idx) => {
           return <Card key={idx} suit={hand.suit} value={hand.value} />;
@@ -33,7 +42,7 @@ const Player = ({ player, gameStatus, handleHit, handleStand }) => {
           </CommonButton>
         </ButtonsDiv>
       )}
-    </div>
+    </PlayerDiv>
   );
 };
 export default Player;
