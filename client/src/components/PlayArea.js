@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Dealer from "./Dealer";
 import Player from "./Player";
 import Card from "./Card";
 import axios from "axios";
 import styled from "styled-components";
+import { CommonButton } from "../common/CommonButton";
 
 const Container = styled.div`
   display: flex;
@@ -82,27 +83,32 @@ const PlayArea = () => {
       console.log(err);
     }
   };
-  console.log("player ", player);
-  console.log("dealer ", dealer);
-  console.log("new game ", newGame);
 
   return (
-    <Container>
-      <Dealer dealer={dealer} gameStatus={gameStatus} />
-      <CenterDiv>
-        <Card facedown={true} />
-        <StatusDiv>
-          {player?.handStatus !== "PLAYING" && player.handStatus}
-        </StatusDiv>
-      </CenterDiv>
-      <Player
-        player={player}
-        gameStatus={gameStatus}
-        handleHit={handleHit}
-        handleStand={handleStand}
-      />
-      <div>{!newGame && <button onClick={handlePlay}>DEAL</button>}</div>
-    </Container>
+    <>
+      <Container>
+        <Dealer dealer={dealer} gameStatus={gameStatus} />
+        <CenterDiv>
+          <Card facedown={true} />
+          <StatusDiv>
+            {player?.handStatus !== "PLAYING" && player.handStatus}
+          </StatusDiv>
+        </CenterDiv>
+        <Player
+          player={player}
+          gameStatus={gameStatus}
+          handleHit={handleHit}
+          handleStand={handleStand}
+        />
+        <div>
+          {!newGame && (
+            <CommonButton background="#00802b" onClick={handlePlay}>
+              DEAL
+            </CommonButton>
+          )}
+        </div>
+      </Container>
+    </>
   );
 };
 
