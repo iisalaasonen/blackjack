@@ -10,7 +10,7 @@ playRouter.get("/newGame", (request, response) => {
   response.json(gameStatus);
 });
 
-playRouter.get("/hit", (request, response) => {
+playRouter.put("/hit", (request, response, {}) => {
   if (GAME.player.handStatus !== "PLAYING")
     return response.status(400).json({ error: "HAND IS ALREADY PLAYED" });
   GAME.hit();
@@ -19,7 +19,7 @@ playRouter.get("/hit", (request, response) => {
   response.json(gameStatus);
 });
 
-playRouter.get("/stand", (request, response) => {
+playRouter.put("/stand", (request, response) => {
   //come here only if player status is PLAYER.status === PLAYING
   if (GAME.player.handStatus !== "PLAYING") {
     return response.status(400).json({ error: "HAND IS ALREADY PLAYED" });
