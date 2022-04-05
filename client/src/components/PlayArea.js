@@ -58,7 +58,7 @@ const PlayArea = () => {
 
   const handleHit = async () => {
     try {
-      const response = await axios.get("/hit");
+      const response = await axios.post("/hit");
       setPlayer(response.data.player);
       setGameStatus(response.data.player.handStatus);
       setDealer(response.data.dealer);
@@ -72,7 +72,7 @@ const PlayArea = () => {
 
   const handleStand = async () => {
     try {
-      const response = await axios.get("/stand");
+      const response = await axios.post("/stand");
       setPlayer(response.data.player);
       setGameStatus(response.data.player.handStatus);
       setDealer(response.data.dealer);
