@@ -49,10 +49,18 @@ const NavLink = styled(Link)`
   }
 `;
 
+const BlackjackText = styled.p`
+  color: var(--color-text);
+  text-shadow: 2px 2px #b4bbbb;
+  padding-left: 20px;
+`;
+
 const Navbar = () => {
   return (
     <Header>
-      <div>BLACKJACK</div>
+      <div>
+        <BlackjackText>BLACKJACK</BlackjackText>
+      </div>
       <NavBar>
         <ul>
           <li>
