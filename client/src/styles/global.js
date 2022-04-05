@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import cardBackground from "../images/cardbackground.jpg";
 const GlobalStyle = createGlobalStyle`
 * {
   box-sizing: border-box;
@@ -21,7 +22,11 @@ html {
 body {
   height: 100vh;
   font-family: 'Roboto', sans-serif;
-  background: var(--color-primary);
+  background-image: url("${cardBackground}");
+  background-position: center; 
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: var(--color-primary);
 }
 }
 `;
