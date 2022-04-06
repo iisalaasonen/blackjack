@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import Dealer from "./Dealer";
 import Player from "./Player";
 import Card from "./Card";
-import axios from "axios";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { CommonButton } from "../common/CommonButton";
+import playService from "../services/play";
 
 const Container = styled.div`
   display: flex;
@@ -30,6 +30,22 @@ const StatusDiv = styled.div`
   margin: auto;
 `;
 
+const showStatus = keyframes`
+0% {
+  font-size: 1rem;
+}
+100% {
+  font-size: 2rem;
+}
+`;
+
+const Status = styled.p`
+  animation-name: ${showStatus};
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+`;
+
 const PlayArea = () => {
   const [player, setPlayer] = useState({});
   const [dealer, setDealer] = useState({});
@@ -38,12 +54,11 @@ const PlayArea = () => {
 
   const fetchCards = async () => {
     try {
-      const response = await axios.get("/newGame");
-      console.log("response ", response);
-      setPlayer(response.data.player);
-      setGameStatus(response.data.player.handStatus);
-      setDealer(response.data.dealer);
-      if (response.data.player.handStatus !== "PLAYING") {
+      const data = await playService.newGame();
+      setPlayer(data.player);
+      setGameStatus(data.player.handStatus);
+      setDealer(data.dealer);
+      if (data.player.handStatus !== "PLAYING") {
         setNewGame(false);
       }
     } catch (err) {
@@ -51,18 +66,20 @@ const PlayArea = () => {
     }
   };
 
-  const handlePlay = () => {
+  const handlePlay = (e) => {
+    e.preventDefault();
     fetchCards().catch((e) => console.log(e));
     setNewGame(!newGame);
   };
 
-  const handleHit = async () => {
+  const handleHit = async (e) => {
+    e.preventDefault();
     try {
-      const response = await axios.post("/hit");
-      setPlayer(response.data.player);
-      setGameStatus(response.data.player.handStatus);
-      setDealer(response.data.dealer);
-      if (response.data.player.handStatus !== "PLAYING") {
+      const data = await playService.hit();
+      setPlayer(data.player);
+      setGameStatus(data.player.handStatus);
+      setDealer(data.dealer);
+      if (data.player.handStatus !== "PLAYING") {
         setNewGame(false);
       }
     } catch (err) {
@@ -70,13 +87,14 @@ const PlayArea = () => {
     }
   };
 
-  const handleStand = async () => {
+  const handleStand = async (e) => {
+    e.preventDefault();
     try {
-      const response = await axios.post("/stand");
-      setPlayer(response.data.player);
-      setGameStatus(response.data.player.handStatus);
-      setDealer(response.data.dealer);
-      if (response.data.player.handStatus !== "PLAYING") {
+      const data = await playService.stand();
+      setPlayer(data.player);
+      setGameStatus(data.player.handStatus);
+      setDealer(data.dealer);
+      if (data.player.handStatus !== "PLAYING") {
         setNewGame(false);
       }
     } catch (err) {
@@ -91,7 +109,11 @@ const PlayArea = () => {
         <CenterDiv>
           <Card facedown={true} />
           <StatusDiv>
-            {player?.handStatus !== "PLAYING" && player.handStatus}
+            {player?.handStatus !== "PLAYING" ? (
+              <Status>{player.handStatus}</Status>
+            ) : (
+              ""
+            )}
           </StatusDiv>
         </CenterDiv>
         <Player
